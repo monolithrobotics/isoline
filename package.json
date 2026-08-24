@@ -1,0 +1,77 @@
+{
+  "name": "@monolithrobotics/isoline",
+  "version": "0.0.0",
+  "description": "Headless, unstyled Vue 3 UI primitives. Behaviour and accessibility only — you bring the CSS.",
+  "keywords": [
+    "vue",
+    "vue3",
+    "headless",
+    "unstyled",
+    "ui",
+    "primitives",
+    "accessibility",
+    "aria"
+  ],
+  "license": "MIT",
+  "author": "Monolith Robotics",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monolithrobotics/isoline.git"
+  },
+  "homepage": "https://github.com/monolithrobotics/isoline#readme",
+  "bugs": {
+    "url": "https://github.com/monolithrobotics/isoline/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/isoline.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "module": "./dist/isoline.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "vue-tsc --build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{ts,vue}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,vue}\""
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.1",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitest/coverage-v8": "^4.1.11",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/test-utils": "^2.4.11",
+    "eslint": "^10.9.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.10.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.11",
+    "vue": "^3.5.41",
+    "vue-tsc": "^3.3.11"
+  }
+}
