@@ -20,9 +20,8 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
-      # The package is consumed by KONTUR through its published tarball, so a
-      # file missing from `files` breaks the consumer and nothing here. Pack
-      # and assert the entry points exist.
+      # Consumers get the published tarball, so a file missing from `files`
+      # breaks them and nothing here. Pack and assert the entry points exist.
       - name: Verify packed contents
         run: |
           npm pack --silent
