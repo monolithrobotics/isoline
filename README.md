@@ -36,17 +36,17 @@ const enabled = ref(false)
 
 ## Why it exists
 
-It was extracted from [KONTUR](https://github.com/monolithrobotics), a ground control
-station, after PrimeVue moved to a commercial licence and archived its MIT line. KONTUR
-already owned its whole visual layer and was overriding the library's theme everywhere it
-touched it — so what was actually being depended on was the behaviour underneath. This is
-that layer, on its own.
+It was extracted from an internal application after PrimeVue moved to a commercial
+licence and archived its MIT line. That application already owned its whole visual
+layer and was overriding the library's theme everywhere it touched it — so what was
+actually being depended on was the behaviour underneath. This is that layer, on its own.
 
-**Scope, honestly:** this is built for one product and released because there is no reason
-to keep it closed. It is MIT, use it freely — but it is not a funded open-source project.
-The API will move before 1.0, issues are answered when someone has time, and components
-land when KONTUR needs them rather than to complete a set. If you want the same idea with
-support behind it, [reka-ui](https://reka-ui.com) is excellent and we would not be offended.
+**Scope, honestly:** this is built for one application and released because there is no
+reason to keep it closed. It is MIT, use it freely — but it is not a funded open-source
+project. The API will move before 1.0, issues are answered when someone has time, and
+components land when that application needs them rather than to complete a set. If you
+want the same idea with support behind it, [reka-ui](https://reka-ui.com) is excellent
+and we would not be offended.
 
 ## Components
 
