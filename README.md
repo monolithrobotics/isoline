@@ -27,10 +27,18 @@ const enabled = ref(false)
 </template>
 
 <style>
-.my-switch { /* your design system, not ours */ }
-.my-switch[data-state='checked'] { background: var(--accent); }
-.my-switch[data-disabled] { opacity: 0.5; }
-.my-switch__thumb[data-state='checked'] { transform: translateX(1rem); }
+.my-switch {
+  /* your design system, not ours */
+}
+.my-switch[data-state='checked'] {
+  background: var(--accent);
+}
+.my-switch[data-disabled] {
+  opacity: 0.5;
+}
+.my-switch__thumb[data-state='checked'] {
+  transform: translateX(1rem);
+}
 </style>
 ```
 
@@ -50,10 +58,12 @@ and we would not be offended.
 
 ## Components
 
-| Component | Status |
-| --- | --- |
-| `Switch` | ✅ |
-| `Checkbox`, `RadioGroup`, `Slider`, `NumberField` | planned |
+| Component                     | Status  |
+| ----------------------------- | ------- |
+| `Switch`                      | ✅      |
+| `Checkbox`                    | ✅      |
+| `RadioGroup`                  | ✅      |
+| `Slider`, `NumberField`       | planned |
 | `Dialog`, `Tooltip`, `Select` | planned |
 
 ## Conventions
@@ -68,6 +78,10 @@ and we would not be offended.
   parent stays the single owner of the value.
 - **Compound components share state through context.** A part rendered outside its root
   throws immediately with the fix in the message, rather than failing later on `undefined`.
+- **A group is one tab stop.** Where a set of controls belongs together — `RadioGroup`
+  today, `Select` later — Tab enters the set once and the arrows move within it, which is
+  what the native control does. One tab stop per option strands keyboard users in long
+  lists.
 
 ## Development
 

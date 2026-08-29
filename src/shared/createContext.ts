@@ -13,9 +13,12 @@ import { inject, provide, type InjectionKey } from 'vue'
  * access, pointing at our internals. Here it throws immediately, naming both
  * components and the fix.
  *
- * @param name Component name used in the error message, e.g. `Switch`.
+ * @param name Component family used in the error message, e.g. `Switch`.
+ * @param rootName The component that provides the context, when it is not
+ *   simply `<name>Root` — `<RadioGroupIndicator>` belongs to
+ *   `<RadioGroupItem>`, which has no `Root` suffix.
  */
-export function createContext<T>(name: string) {
+export function createContext<T>(name: string, rootName = `${name}Root`) {
   const key: InjectionKey<T> = Symbol(`isoline:${name}`)
 
   const provideContext = (value: T): T => {
@@ -27,8 +30,8 @@ export function createContext<T>(name: string) {
     const context = inject(key, null)
     if (context === null) {
       throw new Error(
-        `[isoline] A <${name}> part was rendered outside <${name}Root>. ` +
-          `Wrap it in <${name}Root> so it can read the shared state.`,
+        `[isoline] A <${name}> part was rendered outside <${rootName}>. ` +
+          `Wrap it in <${rootName}> so it can read the shared state.`,
       )
     }
     return context

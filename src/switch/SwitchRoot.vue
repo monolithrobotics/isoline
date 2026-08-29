@@ -16,6 +16,7 @@
  */
 import { computed } from 'vue'
 import { provideSwitchContext } from './context'
+import { VISUALLY_HIDDEN } from '../shared/visuallyHidden'
 
 const props = withDefaults(
   defineProps<{
@@ -83,16 +84,6 @@ function toggle() {
     :checked="checked"
     :disabled="disabled"
     :required="required"
-    style="
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
-      border: 0;
-    "
+    :style="VISUALLY_HIDDEN"
   />
 </template>
