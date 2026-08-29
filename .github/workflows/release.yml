@@ -1,0 +1,51 @@
+name: Release
+
+# Tag-driven. `git tag v0.1.0 && git push --tags` is the whole ritual —
+# there is no "publish" button and no publishing from a laptop.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Trusted publishing: npm mints a short-lived credential from this
+      # token. No NPM_TOKEN secret exists in this repo, deliberately —
+      # there is nothing to leak or rotate.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      # OIDC publishing needs npm >= 11.5.1; node 22 ships an older one.
+      - run: npm install -g npm@latest
+
+      - run: npm ci
+
+      # The tag is the version. A tag that disagrees with package.json
+      # would publish something nobody asked for — fail loudly instead.
+      - name: Tag matches package.json
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg=$(node -p "require('./package.json').version")
+          [ "$tag" = "$pkg" ] || {
+            echo "tag v$tag != package.json $pkg"; exit 1;
+          }
+
+      # Same gates as CI. A tag must not be able to ship what a PR could not.
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build
+
+      # `--provenance` attaches a signed attestation tying the tarball to
+      # this commit and this workflow. Free, and it is what makes a public
+      # package auditable by the consumer.
+      - run: npm publish --provenance --access public

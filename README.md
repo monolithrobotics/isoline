@@ -82,6 +82,34 @@ npm run build      # vite lib build + bundled .d.ts
 Vue is a peer dependency and is never bundled — two Vue runtimes in one app break
 `provide`/`inject` across the boundary.
 
+## Releasing
+
+Published to npm as [`@monolithrobotics/isoline`](https://www.npmjs.com/package/@monolithrobotics/isoline)
+by [`.github/workflows/release.yml`](.github/workflows/release.yml), which fires
+on a `v*` tag and nothing else. There is no publish token in this repo — the
+workflow authenticates to npm through GitHub OIDC (trusted publishing) and
+attaches a provenance attestation.
+
+```bash
+npm version minor          # or patch — pre-1.0, breaking changes go in minor
+git push --follow-tags
+```
+
+The workflow re-runs lint, format, typecheck, test and build before publishing,
+and refuses a tag whose version disagrees with `package.json`.
+
+**Pre-1.0 versioning.** The API moves before 1.0, so a minor bump may break you.
+Consumers should pin an exact version (`"0.1.0"`, not `"^0.1.0"`) and upgrade
+deliberately.
+
+**One-time setup**, done by a human, not CI: create the `monolithrobotics` org
+on npmjs, then enable trusted publishing for this package (npm → package
+settings → Publishing access → GitHub Actions, repo `monolithrobotics/isoline`,
+workflow `release.yml`). If npm will not configure a trusted publisher for a
+package that does not exist yet, publish `0.1.0` once by hand
+(`npm publish --access public`) and enable it immediately after — every release
+from then on goes through the tag.
+
 ## Licence
 
 MIT © Monolith Robotics
