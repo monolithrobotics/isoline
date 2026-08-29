@@ -1,6 +1,6 @@
 {
   "name": "@monolithrobotics/isoline",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Headless, unstyled Vue 3 UI primitives. Behaviour and accessibility only — you bring the CSS.",
   "keywords": [
     "vue",
@@ -44,6 +44,7 @@
   },
   "scripts": {
     "build": "vite build",
+    "prepack": "npm run build",
     "typecheck": "vue-tsc --build",
     "test": "vitest run",
     "test:watch": "vitest",
