@@ -114,23 +114,53 @@ and we would not be offended.
 | `Switch`        | ✅               |
 | `Checkbox`      | ✅               |
 | `RadioGroup`    | ✅               |
+| `Toggle`        | ✅               |
 | `Slider`        | ✅               |
 | `NumberField`   | ✅               |
-| `Dialog`        | ✅ modal         |
+| `PasswordField` | ✅               |
+| `DatePicker`    | ✅ single date   |
 | `Select`        | ✅ single choice |
 | `MultiSelect`   | ✅               |
+| `Dialog`        | ✅ modal         |
 | `Tooltip`       | ✅               |
-| `Toggle`        | planned          |
-| `PasswordField` | planned          |
-| `Popover`       | planned          |
-| `Toast`         | planned          |
-| `DatePicker`    | planned          |
 
-**Not planned, on purpose.** A text input, a button, a textarea, a status
-message, a floating label and a spinner have no behaviour to extract — they are
-an element and some CSS. A library part for them would add an import, a layer of
-indirection and a version to track, and give you nothing your own markup does
-not already do. Write them yourself.
+### Planned
+
+Ordered by how much behaviour there is to get wrong, which is the only reason
+any of these belongs in a library rather than in your own markup.
+
+| Component                   | What it is for                                                      |
+| --------------------------- | ------------------------------------------------------------------- |
+| `Popover`                   | Anchored, non-modal, dismissible — a tooltip that can hold controls |
+| `Menu`                      | Roving focus, submenus, typeahead, checkbox and radio items         |
+| `ContextMenu`               | The same menu, opened by right-click at the pointer                 |
+| `CommandMenu`               | Searchable palette over the same list behaviour                     |
+| `Toast`                     | A live region, a queue and timers that pause on hover               |
+| `Tabs`                      | Roving tab stop over the tabs, panels wired by `aria-controls`      |
+| `Accordion`                 | Disclosure with single or multiple open, and keyboard between heads |
+| `Combobox`                  | `Select` with a text input over it, including async suggestions     |
+| `Listbox`                   | The list without the popup, for a panel or a sidebar                |
+| `Tree`                      | Expand, collapse, typeahead over a hierarchy                        |
+| `Paginator`                 | Page arithmetic, ellipsis ranges, and the keyboard over them        |
+| `VirtualScroller`           | Windowed rendering, reusable by long `Select` and `Tree` lists      |
+| `Splitter`                  | Draggable panes with keyboard resize and min/max                    |
+| `FileUpload`                | Drag-drop target, type and size validation, per-file progress       |
+| `TagsInput`                 | Tokens with backspace editing and paste splitting                   |
+| `OtpInput`                  | Focus that walks between boxes, and paste across all of them        |
+| `Rating`                    | A radio group that reads as stars                                   |
+| `FocusTrap`, `DismissLayer` | The pieces inside `Dialog`, exposed for building your own overlays  |
+
+### Not planned, on purpose
+
+A text input, a button, a textarea, a status message, a floating label, a card,
+a divider, a badge, a chip, a tag, an avatar, a skeleton, a progress bar or a
+spinner have no behaviour to extract — they are an element and some CSS. A
+library part for them costs an import, a layer of indirection and a version to
+track, and gives you nothing your own markup does not already do. Write them
+yourself.
+
+Ripple effects, scroll-driven animation and class-toggling directives are a
+theme's job, not a behaviour library's.
 
 ## Conventions
 
@@ -186,7 +216,7 @@ The workflow re-runs lint, format, typecheck, test and build before publishing,
 and refuses a tag whose version disagrees with `package.json`.
 
 **Pre-1.0 versioning.** The API moves before 1.0, so a minor bump may break you.
-Consumers should pin an exact version (`"0.3.0"`, not `"^0.3.0"`) and upgrade
+Consumers should pin an exact version (`"0.4.0"`, not `"^0.4.0"`) and upgrade
 deliberately.
 
 Trusted publishing is configured against this repository and `release.yml`, and the
