@@ -1,14 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
 import { createContext } from '../shared/createContext'
-
-export interface SelectItemRecord {
-  id: string
-  value: string
-  /** What typeahead matches against. */
-  textValue: string
-  disabled: boolean
-  el: HTMLElement
-}
+import type { ListboxItem } from '../shared/listbox'
 
 /** Where the highlight goes once an opening list has rendered its options. */
 export type OpenIntent =
@@ -34,10 +26,10 @@ export interface SelectContext {
    */
   openWith: (intent: OpenIntent) => void
   select: (value: string) => void
-  register: (item: SelectItemRecord) => void
+  register: (item: ListboxItem) => void
   unregister: (id: string) => void
   /** Registered options in document order, disabled ones included. */
-  items: () => SelectItemRecord[]
+  items: () => ListboxItem[]
   highlight: (id: string | undefined) => void
   /** Move the highlight by a step, or to an end of the list. */
   moveHighlight: (to: number | 'first' | 'last') => void

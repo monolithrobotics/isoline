@@ -109,16 +109,28 @@ and we would not be offended.
 
 ## Components
 
-| Component                | Status           |
-| ------------------------ | ---------------- |
-| `Switch`                 | ✅               |
-| `Checkbox`               | ✅               |
-| `RadioGroup`             | ✅               |
-| `Dialog`                 | ✅ modal         |
-| `Select`                 | ✅ single choice |
-| `Slider`                 | ✅               |
-| `NumberField`            | ✅               |
-| `Tooltip`, `MultiSelect` | planned          |
+| Component       | Status           |
+| --------------- | ---------------- |
+| `Switch`        | ✅               |
+| `Checkbox`      | ✅               |
+| `RadioGroup`    | ✅               |
+| `Slider`        | ✅               |
+| `NumberField`   | ✅               |
+| `Dialog`        | ✅ modal         |
+| `Select`        | ✅ single choice |
+| `MultiSelect`   | ✅               |
+| `Tooltip`       | ✅               |
+| `Toggle`        | planned          |
+| `PasswordField` | planned          |
+| `Popover`       | planned          |
+| `Toast`         | planned          |
+| `DatePicker`    | planned          |
+
+**Not planned, on purpose.** A text input, a button, a textarea, a status
+message, a floating label and a spinner have no behaviour to extract — they are
+an element and some CSS. A library part for them would add an import, a layer of
+indirection and a version to track, and give you nothing your own markup does
+not already do. Write them yourself.
 
 ## Conventions
 
@@ -174,7 +186,7 @@ The workflow re-runs lint, format, typecheck, test and build before publishing,
 and refuses a tag whose version disagrees with `package.json`.
 
 **Pre-1.0 versioning.** The API moves before 1.0, so a minor bump may break you.
-Consumers should pin an exact version (`"0.2.0"`, not `"^0.2.0"`) and upgrade
+Consumers should pin an exact version (`"0.3.0"`, not `"^0.3.0"`) and upgrade
 deliberately.
 
 Trusted publishing is configured against this repository and `release.yml`, and the
