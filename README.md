@@ -124,6 +124,7 @@ and we would not be offended.
 | `Dialog`        | ✅ modal              |
 | `Tooltip`       | ✅                    |
 | `DataTable`     | ✅ sort, select, page |
+| `Splitter`      | ✅                    |
 
 ### Planned
 

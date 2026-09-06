@@ -52,6 +52,11 @@ export { default as DatePickerCell } from './date-picker/DatePickerCell.vue'
 export { default as DatePickerNav } from './date-picker/DatePickerNav.vue'
 export type { DatePickerContext, DatePickerDay } from './date-picker/context'
 
+export { default as SplitterRoot } from './splitter/SplitterRoot.vue'
+export { default as SplitterPanel } from './splitter/SplitterPanel.vue'
+export { default as SplitterHandle } from './splitter/SplitterHandle.vue'
+export type { SplitterContext } from './splitter/context'
+
 export { default as DataTableRoot } from './data-table/DataTableRoot.vue'
 export { default as DataTableColumnHeader } from './data-table/DataTableColumnHeader.vue'
 export { default as DataTableRow } from './data-table/DataTableRow.vue'
