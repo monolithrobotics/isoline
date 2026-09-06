@@ -38,6 +38,20 @@ export { default as MultiSelectItem } from './multi-select/MultiSelectItem.vue'
 export { default as MultiSelectItemIndicator } from './multi-select/MultiSelectItemIndicator.vue'
 export type { MultiSelectContext, MultiSelectItemContext } from './multi-select/context'
 
+export { default as Toggle } from './toggle/Toggle.vue'
+
+export { default as PasswordFieldRoot } from './password-field/PasswordFieldRoot.vue'
+export { default as PasswordFieldInput } from './password-field/PasswordFieldInput.vue'
+export { default as PasswordFieldToggle } from './password-field/PasswordFieldToggle.vue'
+export { default as PasswordFieldCapsLock } from './password-field/PasswordFieldCapsLock.vue'
+export type { PasswordFieldContext } from './password-field/context'
+
+export { default as DatePickerRoot } from './date-picker/DatePickerRoot.vue'
+export { default as DatePickerGrid } from './date-picker/DatePickerGrid.vue'
+export { default as DatePickerCell } from './date-picker/DatePickerCell.vue'
+export { default as DatePickerNav } from './date-picker/DatePickerNav.vue'
+export type { DatePickerContext, DatePickerDay } from './date-picker/context'
+
 export { default as TooltipRoot } from './tooltip/TooltipRoot.vue'
 export { default as TooltipTrigger } from './tooltip/TooltipTrigger.vue'
 export { default as TooltipPortal } from './portal/Portal.vue'
