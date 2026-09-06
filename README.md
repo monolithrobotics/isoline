@@ -109,20 +109,22 @@ and we would not be offended.
 
 ## Components
 
-| Component       | Status           |
-| --------------- | ---------------- |
-| `Switch`        | ✅               |
-| `Checkbox`      | ✅               |
-| `RadioGroup`    | ✅               |
-| `Toggle`        | ✅               |
-| `Slider`        | ✅               |
-| `NumberField`   | ✅               |
-| `PasswordField` | ✅               |
-| `DatePicker`    | ✅ single date   |
-| `Select`        | ✅ single choice |
-| `MultiSelect`   | ✅               |
-| `Dialog`        | ✅ modal         |
-| `Tooltip`       | ✅               |
+| Component       | Status                |
+| --------------- | --------------------- |
+| `Switch`        | ✅                    |
+| `Checkbox`      | ✅                    |
+| `RadioGroup`    | ✅                    |
+| `Toggle`        | ✅                    |
+| `Slider`        | ✅                    |
+| `NumberField`   | ✅                    |
+| `PasswordField` | ✅                    |
+| `DatePicker`    | ✅ single date        |
+| `Select`        | ✅ single choice      |
+| `MultiSelect`   | ✅                    |
+| `Dialog`        | ✅ modal              |
+| `Tooltip`       | ✅                    |
+| `DataTable`     | ✅ sort, select, page |
+| `Splitter`      | ✅                    |
 
 ### Planned
 
@@ -216,7 +218,7 @@ The workflow re-runs lint, format, typecheck, test and build before publishing,
 and refuses a tag whose version disagrees with `package.json`.
 
 **Pre-1.0 versioning.** The API moves before 1.0, so a minor bump may break you.
-Consumers should pin an exact version (`"0.4.0"`, not `"^0.4.0"`) and upgrade
+Consumers should pin an exact version (`"0.5.0"`, not `"^0.5.0"`) and upgrade
 deliberately.
 
 Trusted publishing is configured against this repository and `release.yml`, and the

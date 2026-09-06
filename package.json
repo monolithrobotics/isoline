@@ -1,6 +1,6 @@
 {
   "name": "@monolithrobotics/isoline",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Headless, unstyled Vue 3 UI primitives. Behaviour and accessibility only — you bring the CSS.",
   "keywords": [
     "vue",
