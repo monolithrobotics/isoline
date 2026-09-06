@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * The popup list.
+ * The popup list, shared by `Select` and `MultiSelect`.
  *
  * Positioned against the trigger in viewport coordinates and re-measured while
  * open, because the page under a `position: fixed` popup keeps moving: an
@@ -11,7 +11,7 @@
  * trigger, which is where focus stays.
  */
 import { onBeforeUnmount, ref, watch } from 'vue'
-import { injectSelectContext } from './context'
+import { injectListboxPopupContext } from '../shared/popup'
 import { anchorBelow } from '../shared/anchor'
 
 const props = withDefaults(
@@ -24,7 +24,8 @@ const props = withDefaults(
   { sideOffset: 4, matchTriggerWidth: true },
 )
 
-const { open, contentId, triggerId, triggerEl, setOpen } = injectSelectContext()
+const { open, multiselectable, contentId, triggerId, triggerEl, setOpen } =
+  injectListboxPopupContext()
 
 const el = ref<HTMLElement | null>(null)
 const side = ref<'top' | 'bottom'>('bottom')
@@ -85,6 +86,7 @@ onBeforeUnmount(teardown)
     :id="contentId"
     ref="el"
     role="listbox"
+    :aria-multiselectable="multiselectable || undefined"
     :aria-labelledby="triggerId"
     :data-state="open ? 'open' : 'closed'"
     :data-side="side"

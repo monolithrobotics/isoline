@@ -1,8 +1,10 @@
 <script setup lang="ts">
 /**
- * Moves the list out to the end of `<body>`.
+ * Moves a floating element out to the end of `<body>`. Exported as
+ * `SelectPortal`, `MultiSelectPortal` and `TooltipPortal` — one component,
+ * three names, because a portal has nothing to do with what it carries.
  *
- * Without this the popup inherits every `overflow: hidden`, `transform` and
+ * Without this a popup inherits every `overflow: hidden`, `transform` and
  * `z-index` between it and the root — the reason a select inside a scrolling
  * panel renders clipped, or behind a header, whatever z-index it is given.
  */
