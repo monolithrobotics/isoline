@@ -30,4 +30,15 @@ export { default as SelectItemIndicator } from './select/SelectItemIndicator.vue
 export type { SelectContext, SelectItemRecord } from './select/context'
 export type { SelectItemContext } from './select/itemContext'
 
+export { default as NumberFieldRoot } from './number-field/NumberFieldRoot.vue'
+export { default as NumberFieldInput } from './number-field/NumberFieldInput.vue'
+export { default as NumberFieldIncrement } from './number-field/NumberFieldIncrement.vue'
+export { default as NumberFieldDecrement } from './number-field/NumberFieldDecrement.vue'
+export type { NumberFieldContext } from './number-field/context'
+
+export { default as SliderRoot } from './slider/SliderRoot.vue'
+export { default as SliderRange } from './slider/SliderRange.vue'
+export { default as SliderThumb } from './slider/SliderThumb.vue'
+export type { SliderContext } from './slider/context'
+
 export { createContext } from './shared/createContext'
