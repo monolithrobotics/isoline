@@ -65,7 +65,8 @@ and we would not be offended.
 | `RadioGroup`             | ✅               |
 | `Dialog`                 | ✅ modal         |
 | `Select`                 | ✅ single choice |
-| `Slider`, `NumberField`  | planned          |
+| `Slider`                 | ✅               |
+| `NumberField`            | ✅               |
 | `Tooltip`, `MultiSelect` | planned          |
 
 ## Conventions
