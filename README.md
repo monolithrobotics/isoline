@@ -58,13 +58,15 @@ and we would not be offended.
 
 ## Components
 
-| Component               | Status  |
-| ----------------------- | ------- |
-| `Switch`                | ✅      |
-| `Checkbox`              | ✅      |
-| `RadioGroup`            | ✅      |
-| `Slider`, `NumberField` | planned |
-| `Tooltip`, `Select`     | planned |
+| Component                | Status           |
+| ------------------------ | ---------------- |
+| `Switch`                 | ✅               |
+| `Checkbox`               | ✅               |
+| `RadioGroup`             | ✅               |
+| `Dialog`                 | ✅ modal         |
+| `Select`                 | ✅ single choice |
+| `Slider`, `NumberField`  | planned          |
+| `Tooltip`, `MultiSelect` | planned          |
 
 ## Conventions
 

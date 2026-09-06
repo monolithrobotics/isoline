@@ -21,4 +21,13 @@ export { default as DialogDescription } from './dialog/DialogDescription.vue'
 export { default as DialogClose } from './dialog/DialogClose.vue'
 export type { DialogContext } from './dialog/context'
 
+export { default as SelectRoot } from './select/SelectRoot.vue'
+export { default as SelectTrigger } from './select/SelectTrigger.vue'
+export { default as SelectPortal } from './select/SelectPortal.vue'
+export { default as SelectContent } from './select/SelectContent.vue'
+export { default as SelectItem } from './select/SelectItem.vue'
+export { default as SelectItemIndicator } from './select/SelectItemIndicator.vue'
+export type { SelectContext, SelectItemRecord } from './select/context'
+export type { SelectItemContext } from './select/itemContext'
+
 export { createContext } from './shared/createContext'
