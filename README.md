@@ -42,6 +42,57 @@ const enabled = ref(false)
 </style>
 ```
 
+Components with more than one moving part are compound: a root that owns the state and
+parts that read it, so every element between them is yours to write, style and place.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import {
+  SelectRoot,
+  SelectTrigger,
+  SelectPortal,
+  SelectContent,
+  SelectItem,
+  SelectItemIndicator,
+} from '@monolithrobotics/isoline'
+
+const modes = [
+  { value: 'auto', label: 'Automatic' },
+  { value: 'manual', label: 'Manual' },
+]
+const mode = ref<string>()
+const open = ref(false)
+</script>
+
+<template>
+  <SelectRoot v-model="mode" v-model:open="open" name="mode">
+    <!-- The library does not know your labels, so the trigger's content is yours. -->
+    <SelectTrigger class="trigger">
+      {{ modes.find((m) => m.value === mode)?.label ?? 'Pick a mode' }}
+    </SelectTrigger>
+
+    <SelectPortal>
+      <SelectContent class="listbox">
+        <SelectItem v-for="m in modes" :key="m.value" :value="m.value" class="option">
+          {{ m.label }}
+          <SelectItemIndicator>✓</SelectItemIndicator>
+        </SelectItem>
+      </SelectContent>
+    </SelectPortal>
+  </SelectRoot>
+</template>
+
+<style>
+.option[data-highlighted] {
+  background: var(--accent);
+}
+.listbox[data-side='top'] {
+  transform-origin: bottom;
+}
+</style>
+```
+
 ## Why it exists
 
 It was extracted from an internal application after PrimeVue moved to a commercial
@@ -81,12 +132,19 @@ and we would not be offended.
   parent stays the single owner of the value.
 - **Compound components share state through context.** A part rendered outside its root
   throws immediately with the fix in the message, rather than failing later on `undefined`.
-- **A group is one tab stop.** Where a set of controls belongs together — `RadioGroup`
-  today, `Select` later — Tab enters the set once and the arrows move within it, which is
-  what the native control does. One tab stop per option strands keyboard users in long
-  lists.
+- **A group is one tab stop.** Where a set of controls belongs together — `RadioGroup`,
+  `Select` — Tab enters the set once and the arrows move within it, which is what the
+  native control does. One tab stop per option strands keyboard users in long lists.
+- **Popups are portalled, positions are published.** Anything that floats renders at the
+  end of `<body>`, out of reach of an ancestor's `overflow: hidden` or `transform`.
+  Where a position is continuous rather than a state — a slider's — it arrives as a CSS
+  custom property (`--isoline-slider-fraction`, 0 to 1) so you decide whether it means
+  `left`, `height` or a rotation.
 
 ## Development
+
+Node 24 — earlier majors cannot run the build (`vite` needs a `node:util` export added
+after 20.11), and CI verifies on 24.
 
 ```bash
 npm install
@@ -116,16 +174,14 @@ The workflow re-runs lint, format, typecheck, test and build before publishing,
 and refuses a tag whose version disagrees with `package.json`.
 
 **Pre-1.0 versioning.** The API moves before 1.0, so a minor bump may break you.
-Consumers should pin an exact version (`"0.1.0"`, not `"^0.1.0"`) and upgrade
+Consumers should pin an exact version (`"0.2.0"`, not `"^0.2.0"`) and upgrade
 deliberately.
 
-**One-time setup**, done by a human, not CI: create the `monolithrobotics` org
-on npmjs, then enable trusted publishing for this package (npm → package
-settings → Publishing access → GitHub Actions, repo `monolithrobotics/isoline`,
-workflow `release.yml`). If npm will not configure a trusted publisher for a
-package that does not exist yet, publish `0.1.0` once by hand
-(`npm publish --access public`) and enable it immediately after — every release
-from then on goes through the tag.
+Trusted publishing is configured against this repository and `release.yml`, and the
+package requires two-factor authentication with bypass tokens disallowed — so a leaked
+token cannot publish, and a release that did not come from a tag on this repo cannot
+exist. `0.1.0` was published by hand to bootstrap that, and carries no provenance
+attestation; every release since goes through the tag.
 
 ## Licence
 
