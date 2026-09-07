@@ -18,6 +18,22 @@ import { computed } from 'vue'
 import { provideSwitchContext } from './context'
 import { VISUALLY_HIDDEN } from '../shared/visuallyHidden'
 
+/**
+ * The mirrored input is a sibling of the control, so this component has more
+ * than one root node and Vue therefore refuses to place fallthrough
+ * attributes automatically. Left to itself it drops `class`, `id` and
+ * `aria-label` on the floor — and for an unstyled primitive, dropping `class`
+ * means the consumer's control renders invisible.
+ *
+ * So they are bound onto the button explicitly: that is the element the
+ * consumer means when they write them, and `id` there is what lets a sibling
+ * `<label for>` name it and forward its clicks (`<button>` is labelable).
+ * `v-bind="$attrs"` sits **first** in the attribute list so everything below
+ * it wins — `role`, `aria-checked` and `data-state` are this component's
+ * contract, not a default for the consumer to overwrite.
+ */
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(
   defineProps<{
     /** Whether the switch is on. Use with `v-model`. */
@@ -57,6 +73,7 @@ function toggle() {
 
 <template>
   <button
+    v-bind="$attrs"
     type="button"
     role="switch"
     :aria-checked="checked"

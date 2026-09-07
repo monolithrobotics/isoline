@@ -12,6 +12,30 @@ function mountCheckbox(props: Record<string, unknown> = {}) {
 }
 
 describe('CheckboxRoot', () => {
+  // Same multi-root problem as SwitchRoot: without explicit forwarding Vue
+  // drops `class`, and an unstyled primitive with no class is invisible.
+  it('forwards consumer attributes onto the button', () => {
+    const wrapper = mount(CheckboxRoot, {
+      attrs: { class: 'my-checkbox', id: 'terms', 'aria-label': 'Accept terms' },
+      slots: { default: () => h(CheckboxIndicator) },
+    })
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('my-checkbox')
+    expect(button.attributes('id')).toBe('terms')
+    expect(button.attributes('aria-label')).toBe('Accept terms')
+  })
+
+  it('keeps its own contract when an attribute would contradict it', () => {
+    const wrapper = mount(CheckboxRoot, {
+      props: { modelValue: true },
+      attrs: { role: 'switch' },
+      slots: { default: () => h(CheckboxIndicator) },
+    })
+
+    expect(wrapper.get('button').attributes('role')).toBe('checkbox')
+  })
+
   it('announces itself as a checkbox', () => {
     const button = mountCheckbox().get('button')
 

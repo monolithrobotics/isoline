@@ -17,6 +17,15 @@ import { provideListboxPopupContext } from '../shared/popup'
 import { createListbox } from '../shared/listbox'
 import { VISUALLY_HIDDEN } from '../shared/visuallyHidden'
 
+/**
+ * Renders no element of its own — a slot plus the hidden field that mirrors
+ * the selection for form submission. There is therefore nothing for Vue to
+ * place fallthrough attributes on, and letting it try only produces a dev
+ * warning about attributes it then drops. State the intent instead: a `class`
+ * belongs on `<MultiSelectTrigger>`, which is the element the consumer can see.
+ */
+defineOptions({ inheritAttrs: false })
+
 const props = withDefaults(
   defineProps<{
     /** The selected values. Use with `v-model`. */
