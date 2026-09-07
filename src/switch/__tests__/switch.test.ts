@@ -12,6 +12,48 @@ function mountSwitch(props: Record<string, unknown> = {}) {
 }
 
 describe('SwitchRoot', () => {
+  // The control renders a sibling hidden input, so Vue will not place
+  // fallthrough attributes for us. Dropping `class` on an unstyled primitive
+  // renders an invisible control, which is why these are pinned.
+  it('forwards consumer attributes onto the button', () => {
+    const wrapper = mount(SwitchRoot, {
+      props: { modelValue: false },
+      attrs: { class: 'my-switch', id: 'notify', 'aria-label': 'Notifications' },
+      slots: { default: () => h(SwitchThumb) },
+    })
+    const button = wrapper.get('button')
+
+    expect(button.classes()).toContain('my-switch')
+    // `id` on the button is what lets a sibling `<label for>` name it and
+    // forward its clicks — `<button>` is a labelable element.
+    expect(button.attributes('id')).toBe('notify')
+    expect(button.attributes('aria-label')).toBe('Notifications')
+  })
+
+  it('forwards attributes even while the mirrored input is rendered', () => {
+    const wrapper = mount(SwitchRoot, {
+      props: { modelValue: false, name: 'notifications' },
+      attrs: { class: 'my-switch' },
+      slots: { default: () => h(SwitchThumb) },
+    })
+
+    expect(wrapper.get('button').classes()).toContain('my-switch')
+    // The mirror stays hidden and unclassed — it is plumbing, not the control.
+    expect(wrapper.get('input').classes()).not.toContain('my-switch')
+  })
+
+  it('keeps its own contract when an attribute would contradict it', () => {
+    const wrapper = mount(SwitchRoot, {
+      props: { modelValue: true },
+      attrs: { role: 'checkbox', 'data-state': 'unchecked' },
+      slots: { default: () => h(SwitchThumb) },
+    })
+    const button = wrapper.get('button')
+
+    expect(button.attributes('role')).toBe('switch')
+    expect(button.attributes('data-state')).toBe('checked')
+  })
+
   it('announces itself as a switch rather than a checkbox', () => {
     const wrapper = mountSwitch()
     const button = wrapper.get('button')

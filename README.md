@@ -172,6 +172,14 @@ theme's job, not a behaviour library's.
 - **An absent attribute means absent.** `data-disabled` is either an empty string or not
   rendered at all — never `data-disabled="false"`, which every CSS attribute selector
   would match.
+- **Your attributes land on the control.** `class`, `id`, `aria-label`, `data-testid` —
+  whatever you write on `SwitchRoot` or `CheckboxRoot` is placed on the `<button>` that
+  _is_ the control, never on the hidden input mirroring it for form submission. `id`
+  there is what lets a sibling `<label for>` both name the control and forward its
+  clicks. What the component owns — `role`, `aria-checked`, `data-state` — is not
+  overridable: a switch that could be told to call itself a checkbox is a bug, not a
+  feature. `SelectRoot` and `MultiSelectRoot` render no element of their own, so put
+  attributes on `SelectTrigger` / `MultiSelectTrigger` instead.
 - **`v-model` is one-way in, events out.** A component never mutates its own prop; the
   parent stays the single owner of the value.
 - **Compound components share state through context.** A part rendered outside its root
