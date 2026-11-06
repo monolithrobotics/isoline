@@ -29,9 +29,6 @@ jobs:
           grep -q 'package/dist/isoline.js' packed.txt
           grep -q 'package/dist/index.d.ts' packed.txt
 
-  # The one check the org ruleset "main: CI green" requires (infra
-  # docs/ci-gate.md). Inline, not infra's ci-gate action: a public repo cannot
-  # use actions from the org's private repos. List every other job in `needs`.
   ci-ok:
     if: always()
     needs: [verify]
