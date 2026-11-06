@@ -28,3 +28,25 @@ jobs:
           tar -tzf monolithrobotics-isoline-*.tgz | sort | tee packed.txt
           grep -q 'package/dist/isoline.js' packed.txt
           grep -q 'package/dist/index.d.ts' packed.txt
+
+  # The one check the org ruleset "main: CI green" requires (infra
+  # docs/ci-gate.md). Inline, not infra's ci-gate action: a public repo cannot
+  # use actions from the org's private repos. List every other job in `needs`.
+  ci-ok:
+    if: always()
+    needs: [verify]
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Every job passed or was skipped
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          bad = {k: v["result"] for k, v in json.loads(os.environ["NEEDS"]).items()
+                 if v["result"] not in ("success", "skipped")}
+          for k, r in sorted(bad.items()):
+              print(f"::error::{k}: {r}")
+          sys.exit(1 if bad else 0)
+          PY
